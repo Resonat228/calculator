@@ -114,4 +114,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorText" xml:space="preserve">
+    <value>ErrorText</value>
+  </data>
+  <data name="CreditSumError" xml:space="preserve">
+    <value>Сумма кредита не может быть отрицательной или равной нулю.</value>
+  </data>
 </root>

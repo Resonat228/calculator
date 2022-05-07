@@ -136,7 +136,6 @@
             this.toolTipPaymentType.SetToolTip(this.priceDiffer, "Вариант ежемесячного платежа по кредиту, когда размер ежемесячного платежа по пог" +
         "ашению кредита постепенно уменьшается к концу периода кредитования.");
             this.priceDiffer.UseVisualStyleBackColor = true;
-            this.priceDiffer.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // sumAnnuitet
             // 
@@ -215,7 +214,7 @@
             this.butPriceGo.TabIndex = 19;
             this.butPriceGo.Text = "Рассчитать стоимость";
             this.butPriceGo.UseVisualStyleBackColor = true;
-            this.butPriceGo.Click += new System.EventHandler(this.butPriceGo_Click);
+            this.butPriceGo.Click += new System.EventHandler(this.CalculateSchedule);
             // 
             // butPriceClear
             // 
@@ -225,7 +224,7 @@
             this.butPriceClear.TabIndex = 18;
             this.butPriceClear.Text = "Очистить расчеты";
             this.butPriceClear.UseVisualStyleBackColor = true;
-            this.butPriceClear.Click += new System.EventHandler(this.butPriceClear_Click);
+            this.butPriceClear.Click += new System.EventHandler(this.ClearFields);
             // 
             // pricePeriodCombo
             // 
@@ -238,7 +237,6 @@
             this.pricePeriodCombo.Name = "pricePeriodCombo";
             this.pricePeriodCombo.Size = new System.Drawing.Size(51, 24);
             this.pricePeriodCombo.TabIndex = 15;
-            this.pricePeriodCombo.SelectedIndexChanged += new System.EventHandler(this.pricePeriodCombo_SelectedIndexChanged);
             // 
             // pricePeriod
             // 
@@ -282,7 +280,6 @@
             this.priceCreditSum.ReadOnly = true;
             this.priceCreditSum.Size = new System.Drawing.Size(144, 22);
             this.priceCreditSum.TabIndex = 12;
-            this.priceCreditSum.TextChanged += new System.EventHandler(this.priceCreditSum_TextChanged);
             // 
             // priceInitialType
             // 
@@ -308,7 +305,7 @@
             this.priceInitial.Size = new System.Drawing.Size(108, 22);
             this.priceInitial.TabIndex = 10;
             this.priceInitial.ThousandsSeparator = true;
-            this.priceInitial.ValueChanged += new System.EventHandler(this.priceInitial_ValueChanged);
+            this.priceInitial.ValueChanged += new System.EventHandler(this.FieldValueChanged);
             // 
             // pricePrice
             // 
@@ -332,7 +329,7 @@
             0,
             0,
             0});
-            this.pricePrice.ValueChanged += new System.EventHandler(this.pricePrice_ValueChanged);
+            this.pricePrice.ValueChanged += new System.EventHandler(this.FieldValueChanged);
             // 
             // label9
             // 
@@ -342,7 +339,6 @@
             this.label9.Size = new System.Drawing.Size(94, 16);
             this.label9.TabIndex = 8;
             this.label9.Text = "Вид платежа:";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label8
             // 
@@ -361,7 +357,6 @@
             this.label7.Size = new System.Drawing.Size(75, 16);
             this.label7.TabIndex = 6;
             this.label7.Text = "% годовых";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label6
             // 
@@ -380,7 +375,6 @@
             this.label5.Size = new System.Drawing.Size(34, 16);
             this.label5.TabIndex = 4;
             this.label5.Text = "руб.";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label4
             // 
@@ -390,7 +384,6 @@
             this.label4.Size = new System.Drawing.Size(110, 16);
             this.label4.TabIndex = 3;
             this.label4.Text = "Сумма кредита:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
@@ -409,7 +402,6 @@
             this.label2.Size = new System.Drawing.Size(34, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "руб.";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -452,7 +444,7 @@
             this.butSumGo.TabIndex = 13;
             this.butSumGo.Text = "Рассчитать стоимость";
             this.butSumGo.UseVisualStyleBackColor = true;
-            this.butSumGo.Click += new System.EventHandler(this.butSumGo_Click);
+            this.butSumGo.Click += new System.EventHandler(this.CalculateSchedule);
             // 
             // butSumClear
             // 
@@ -462,7 +454,7 @@
             this.butSumClear.TabIndex = 12;
             this.butSumClear.Text = "Очистить расчеты";
             this.butSumClear.UseVisualStyleBackColor = true;
-            this.butSumClear.Click += new System.EventHandler(this.butSumClear_Click);
+            this.butSumClear.Click += new System.EventHandler(this.ClearFields);
             // 
             // sumPeriodCombo
             // 
@@ -582,7 +574,6 @@
             this.label11.Size = new System.Drawing.Size(34, 16);
             this.label11.TabIndex = 1;
             this.label11.Text = "руб.";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label10
             // 
@@ -761,7 +752,6 @@
             this.label19.Size = new System.Drawing.Size(34, 16);
             this.label19.TabIndex = 3;
             this.label19.Text = "руб.";
-            this.label19.Click += new System.EventHandler(this.label19_Click);
             // 
             // label18
             // 
