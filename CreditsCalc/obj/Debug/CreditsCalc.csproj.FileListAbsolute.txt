@@ -1,0 +1,11 @@
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\bin\Debug\CreditsCalc.exe.config
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\bin\Debug\CreditsCalc.exe
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\bin\Debug\CreditsCalc.pdb
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\obj\Debug\CreditsCalc.csproj.AssemblyReference.cache
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\obj\Debug\CreditsCalc.csproj.SuggestedBindingRedirects.cache
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\obj\Debug\CreditsCalc.Form1.resources
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\obj\Debug\CreditsCalc.Properties.Resources.resources
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\obj\Debug\CreditsCalc.csproj.GenerateResource.cache
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\obj\Debug\CreditsCalc.csproj.CoreCompileInputs.cache
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\obj\Debug\CreditsCalc.exe
+C:\Users\akara\source\repos\CreditsCalc\CreditsCalc\obj\Debug\CreditsCalc.pdb
