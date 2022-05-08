@@ -82,9 +82,9 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.itogPayment = new System.Windows.Forms.TextBox();
-            this.itogOverpayment = new System.Windows.Forms.TextBox();
-            this.itogSum = new System.Windows.Forms.TextBox();
+            this.TotalPayment = new System.Windows.Forms.TextBox();
+            this.TotalOverpayment = new System.Windows.Forms.TextBox();
+            this.TotalSum = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -685,9 +685,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.itogPayment);
-            this.groupBox2.Controls.Add(this.itogOverpayment);
-            this.groupBox2.Controls.Add(this.itogSum);
+            this.groupBox2.Controls.Add(this.TotalPayment);
+            this.groupBox2.Controls.Add(this.TotalOverpayment);
+            this.groupBox2.Controls.Add(this.TotalSum);
             this.groupBox2.Controls.Add(this.label21);
             this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.label19);
@@ -704,27 +704,27 @@
             // 
             // itogPayment
             // 
-            this.itogPayment.Location = new System.Drawing.Point(18, 211);
-            this.itogPayment.Name = "itogPayment";
-            this.itogPayment.ReadOnly = true;
-            this.itogPayment.Size = new System.Drawing.Size(190, 22);
-            this.itogPayment.TabIndex = 8;
+            this.TotalPayment.Location = new System.Drawing.Point(18, 211);
+            this.TotalPayment.Name = "TotalPayment";
+            this.TotalPayment.ReadOnly = true;
+            this.TotalPayment.Size = new System.Drawing.Size(190, 22);
+            this.TotalPayment.TabIndex = 8;
             // 
             // itogOverpayment
             // 
-            this.itogOverpayment.Location = new System.Drawing.Point(18, 133);
-            this.itogOverpayment.Name = "itogOverpayment";
-            this.itogOverpayment.ReadOnly = true;
-            this.itogOverpayment.Size = new System.Drawing.Size(190, 22);
-            this.itogOverpayment.TabIndex = 7;
+            this.TotalOverpayment.Location = new System.Drawing.Point(18, 133);
+            this.TotalOverpayment.Name = "TotalOverpayment";
+            this.TotalOverpayment.ReadOnly = true;
+            this.TotalOverpayment.Size = new System.Drawing.Size(190, 22);
+            this.TotalOverpayment.TabIndex = 7;
             // 
             // itogSum
             // 
-            this.itogSum.Location = new System.Drawing.Point(18, 63);
-            this.itogSum.Name = "itogSum";
-            this.itogSum.ReadOnly = true;
-            this.itogSum.Size = new System.Drawing.Size(190, 22);
-            this.itogSum.TabIndex = 6;
+            this.TotalSum.Location = new System.Drawing.Point(18, 63);
+            this.TotalSum.Name = "TotalSum";
+            this.TotalSum.ReadOnly = true;
+            this.TotalSum.Size = new System.Drawing.Size(190, 22);
+            this.TotalSum.TabIndex = 6;
             // 
             // label21
             // 
@@ -892,9 +892,9 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox itogPayment;
-        private System.Windows.Forms.TextBox itogOverpayment;
-        private System.Windows.Forms.TextBox itogSum;
+        private System.Windows.Forms.TextBox TotalPayment;
+        private System.Windows.Forms.TextBox TotalOverpayment;
+        private System.Windows.Forms.TextBox TotalSum;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;

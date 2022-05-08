@@ -1,7 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Security.AccessControl;
-using System.Text;
 using System.Windows.Forms;
 using CreditsCalc.Properties;
 
@@ -64,78 +61,11 @@ namespace CreditsCalc
 
         private void CalculateCreditSum() // Метод подсчета суммы кредита
         {
-            var valueOfPurchase = Convert.ToDouble(pricePrice.Value);
-            var initialPayment = Convert.ToDouble(priceInitial.Value);
+            var valueOfPurchase = pricePrice.Value.ToDouble();
+            var initialPayment = priceInitial.Value.ToDouble();
             priceCreditSum.Text = priceInitialType.SelectedIndex == 0 ? 
-                (valueOfPurchase - initialPayment).ToString("N2") 
-                : (valueOfPurchase - valueOfPurchase * initialPayment / 100).ToString("N2");
-        }
-        
-
-        private void CalculatePaymentScheduleAnnuitet(double sumCredit, double interestRateYear, double interestRateMonth, int creditPeriod) // Метод расчета Аннуитетного платежа
-        {
-            var payment = sumCredit * (interestRateMonth / (1 - Math.Pow(1 + interestRateMonth, -creditPeriod))); // Ежемесячный платеж
-            var totalCreditSum = payment * creditPeriod; // Итоговая сумма кредита
-
-            itogPayment.Text = payment.ToString("N2"); // Выводим в результаты ежемесячный платёж
-            itogSum.Text = (totalCreditSum).ToString("N2"); // Выводим в результаты итоговую сумму кредита
-
-            // Заполняем график платежей
-            var sumCreditOperation = sumCredit;
-            var endValueCreditSumOperations = totalCreditSum;
-            double ItogPlus = 0;
-            for (int i = 0; i < creditPeriod; ++i)
-            {
-                double procent = sumCreditOperation * (interestRateYear / 100) / 12;
-                sumCreditOperation -= payment - procent;
-                dgvGrafik.Rows.Add();
-                dgvGrafik[0, i].Value = i + 1; //номер месяца
-                dgvGrafik[1, i].Value = payment.ToString("N2"); //Ежемесячный платеж
-                dgvGrafik[2, i].Value = (payment - procent).ToString("N2"); //Платеж за основной долг
-                dgvGrafik[3, i].Value = procent.ToString("N2"); //Платеж процента
-                dgvGrafik[4, i].Value = sumCreditOperation.ToString("N2"); //Основной остаток
-                endValueCreditSumOperations -= payment;
-                ItogPlus = Convert.ToDouble(dgvGrafik[4, i].Value);
-            }
-            itogOverpayment.Text = (totalCreditSum - sumCredit + ItogPlus).ToString("N2");
-        }
-
-        private void CalculatePaymentScheduleDiffer(double sumCredit, double interestRateMonth, int creditPeriod) // Метод расчета Дифференцированного платежа
-        {
-            var mainPayment = sumCredit / creditPeriod; // платеж по основному долгу
-                                                           // Заполняем график платежей
-            var creditSum = 0f;
-            var overPaymentSum = 0f;
-            for (int i = 0; i < creditPeriod; ++i)
-            {
-                double procentPart = sumCredit * interestRateMonth; //подсчет процентной части ежемесячного платежа
-                sumCredit -= mainPayment; //подсчет остатка основного долга (с каждым месяцем уменьшается)
-                dgvGrafik.Rows.Add(); //добавляем строку в таблицу
-                dgvGrafik[0, i].Value = i + 1; //номер месяца
-                dgvGrafik[1, i].Value = (mainPayment + procentPart).ToString("N2"); //полный ежемесячный платеж
-                dgvGrafik[2, i].Value = mainPayment.ToString("N2"); //платеж по основному долгу
-                dgvGrafik[3, i].Value = procentPart.ToString("N2"); //процентная часть ежемесячного платежа
-                dgvGrafik[4, i].Value = sumCredit.ToString("N2"); //Остаток по основному долгу
-            }
-            for (var i = 0; i < creditPeriod; ++i) //Подсчет итоговой стоимости и переплаты по кредиту
-            {
-                if (!float.TryParse(dgvGrafik[1, i].Value.ToString(), out var credit) || 
-                    float.TryParse(dgvGrafik[3, i].Value.ToString(), out var overpayment))
-                {
-                    MessageBox.Show(Resources.ErrorText);
-                }
-                else
-                {
-                    creditSum += credit;
-                    overPaymentSum += overpayment;
-                }
-               
-                
-            }
-            var endValuePlus = Convert.ToDouble(dgvGrafik[4, dgvGrafik.RowCount - 1].Value);
-            itogSum.Text = creditSum.ToString("N2");
-            itogOverpayment.Text = (overPaymentSum + endValuePlus).ToString("N2");
-            itogPayment.Text = dgvGrafik[1, 0].Value + "..." + dgvGrafik[1, dgvGrafik.RowCount - 1].Value;
+                (valueOfPurchase - initialPayment).DoubleToString() 
+                : (valueOfPurchase - valueOfPurchase * initialPayment / 100).DoubleToString();
         }
 
         private bool TryValidateFields()
@@ -152,23 +82,45 @@ namespace CreditsCalc
 
         private void CalculateSchedule(object sender, EventArgs eventArgs)
         {
-            if (!TryValidateFields()) return;
+            if (!TryValidateFields())
+            {
+                return;
+            }
 
             dgvGrafik.Rows.Clear(); // Очищаем таблицу
-            var SumCredit = Convert.ToDouble(priceCreditSum.Text); // Сумма кредита
-            var InterestRateYear = Convert.ToDouble(priceProcent.Value); // Процентная ставка, ГОДОВАЯ
-            var InterestRateMonth = InterestRateYear / 100 / 12; // Процентная ставка, МЕСЯЧНАЯ
-            var CreditPeriod =
-                Convert.ToInt32(pricePeriod.Value); // Срок кредита, переводим в месяцы, если указан в годах
-            if (pricePeriodCombo.SelectedIndex == 0)
-                CreditPeriod *= 12;
-
-            if (priceAnnuitet.Checked) // Аннуитетный платеж
-                CalculatePaymentScheduleAnnuitet(SumCredit, InterestRateYear, InterestRateMonth, CreditPeriod);
-            else if (priceDiffer.Checked) // Дифференцированный платеж
-                CalculatePaymentScheduleDiffer(SumCredit, InterestRateMonth, CreditPeriod);
+            var sumCredit = priceCreditSum.Text.ToDouble(); // Сумма кредита
+            var interestRateYear = priceProcent.Value.ToDouble(); // Процентная ставка, ГОДОВАЯ
+            var interestRateMonth = interestRateYear / 100 / 12; // Процентная ставка, МЕСЯЧНАЯ
+            var creditPeriod = pricePeriod.Value.ToInt32(); 
             
-            butSaveAsCSV.Enabled = true;   
+            if (pricePeriodCombo.SelectedIndex == 0)
+            {
+                creditPeriod *= 12;
+            }
+            butSaveAsCSV.Enabled = true;
+            PaymentSchedule paymentSchedule = default;
+
+            //ToDO: связать priceAnnuited и PriceDiffer чтобы одна из них была всегда актвина
+            if (priceAnnuitet.Checked)
+            {
+                paymentSchedule = new PaymentScheduleAnnuitet();
+            }
+            else if (priceDiffer.Checked)
+            {
+                paymentSchedule = new PaymentScheduleDiffer();
+            }
+
+            if (paymentSchedule == default)
+            {
+                MessageBox.Show(Resources.ErrorText);
+                return;
+            }
+            
+            dgvGrafik.Rows.Add(paymentSchedule.GetGraphRows(sumCredit, creditPeriod, interestRateMonth, interestRateYear));
+            
+            TotalSum.Text = paymentSchedule.TotalSum.DoubleToString();
+            TotalOverpayment.Text = paymentSchedule.TotalOverpayment.DoubleToString();
+            TotalPayment.Text = paymentSchedule.TotalPayment;
         }
 
         private void Clear() // Метод очистки расчетов
@@ -183,9 +135,9 @@ namespace CreditsCalc
             sumProcent.Value = sumProcent.Minimum;
             sumPeriod.Value = sumPeriod.Minimum;
             sumPeriodCombo.SelectedIndex = 0;
-            itogSum.Clear();
-            itogOverpayment.Clear();
-            itogPayment.Clear();
+            TotalSum.Clear();
+            TotalOverpayment.Clear();
+            TotalPayment.Clear();
             dgvGrafik.Rows.Clear();
             butSaveAsCSV.Enabled = false;
         }
@@ -204,8 +156,8 @@ namespace CreditsCalc
         {
             for (var i = 0; i < dgvGrafik.Rows.Count; i++)
             {
-                var x = Convert.ToInt32(dgvGrafik.Rows[i].Cells[0].Value);
-                var y = Convert.ToDouble(dgvGrafik.Rows[i].Cells[4].Value);
+                var x = dgvGrafik.Rows[i].Cells[0].Value.ToDouble();
+                var y = dgvGrafik.Rows[i].Cells[4].Value.ToDouble();
                 chart1.Series[0].Points.AddXY(x, y);
             }
         }
@@ -225,9 +177,9 @@ namespace CreditsCalc
 
         private string GetSaveString()
         {
-            var writeString = $"Итоговая стоимость кредита;{itogSum.Text}\n" +
-                              $"Сумма переплаты:;{itogOverpayment.Text}\n" +
-                              $"Ежемесячный платеж:; {itogPayment.Text}\n" +
+            var writeString = $"Итоговая стоимость кредита;{TotalSum.Text}\n" +
+                              $"Сумма переплаты:;{TotalOverpayment.Text}\n" +
+                              $"Ежемесячный платеж:; {TotalPayment.Text}\n" +
                               "Месяц:;Сумма платежа;Платеж по основному долгу;Платеж по процентам;Остаток основного долга;";
 
             for (var i = 0; i < dgvGrafik.RowCount; i++)
